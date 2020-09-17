@@ -29,14 +29,15 @@ if (process.env.NODE_ENV === 'production') {
   //   const
   mockXHR()
 }
-axios.defaults.headers.common.Authorization = store.state.user.token
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 // Vue.use(axios)
 // Vue.prototype.$axios = axios
-axios.defaults.baseURL = 'https://nuanhudemo.qushen.net'
+axios.defaults.headers.common.Authorization = store.state.user.token
+
+// axios.defaults.baseURL = 'https://nuanhudemo.qushen.net'
 Vue.config.productionTip = false
 
 const vm = new Vue({
