@@ -54,37 +54,35 @@ export default {
       this.floatBox.style.display = 'block'
       this.bigBox.style.display = 'block'
     },
-    // 鼠标划出不显示
     markMouseOut() {
       this.floatBox.style.display = 'none'
       this.bigBox.style.display = 'none'
     },
     markMouseMove(ev) {
-      const _event = ev || window.event // 获取事件
+      const _event = ev || window.event
       let left =
         _event.clientX -
         this.demo.offsetLeft -
         this.smallBox.offsetLeft -
         this.floatBox.offsetWidth / 2
+      console.log(left)
       let top =
         _event.clientY -
         this.demo.offsetTop -
         this.smallBox.offsetTop -
         this.floatBox.offsetHeight / 2
-      console.log(left, top)
+
       if (left < 0) {
-        // 测试是否超出边界
         left = 0
       } else if (left > this.mark.offsetWidth - this.floatBox.offsetWidth) {
         left = this.mark.offsetWidth - this.floatBox.offsetWidth
       }
       if (top < 0) {
-        // 测试是否超出边界
         top = 0
       } else if (top > this.mark.offsetHeight - this.floatBox.offsetHeight) {
         top = this.mark.offsetHeight - this.floatBox.offsetHeight
       }
-      this.floatBox.style.left = left + 'px' // 设置浮动盒子的位置
+      this.floatBox.style.left = left + 'px'
       this.floatBox.style.top = top + 'px'
       const percentX =
         left / (this.mark.offsetWidth - this.floatBox.offsetWidth)

@@ -2,10 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-
-/* Layout */
 import Layout from '@/layout'
-
 export const constantRoutes = [
   {
     path: '/login',
@@ -55,6 +52,18 @@ export const constantRoutes = [
         name: 'Form',
         component: () => import('@/views/Drag/index'),
         meta: { title: '拖拽工具', icon: 'form' }
+      }
+    ]
+  },
+  {
+    path: '/download',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'commonlyUsed',
+        component: () => import('@/views/download/index'),
+        meta: { title: '常用下载方式', icon: 'form' }
       }
     ]
   },
