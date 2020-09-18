@@ -1,39 +1,11 @@
-// import request from '@/utils/request'
-import { httpUrls as http } from './http'
+/*
+* TODO:举个例子
+* */
+import { httpUrls as http } from './http' // 引入http(引入请求)
 
-const request = {}
+const request = {} // 定义方法
 // 登陆
-request.login = data => {
-  return http.post('/api/login', data)
-}
-// 登出
-request.logout = data => {
-  return http.post('/vue-admin-template/user/logout', data)
-}
-// 获取信息
-request.getInfo = () => {
-  return http.get('/api/user/my/profile')
+request.login = (data) => {
+  return http.post('/api/login', data) // 请求方法,传入参数
 }
 export default request
-// export function login(data) {
-//   return request({
-//     url: '/vue-admin-template/user/login',
-//     method: 'post',
-//     data
-//   })
-// }
-
-// export function getInfo(token) {
-//   return request({
-//     url: '/vue-admin-template/user/info',
-//     method: 'get',
-//     params: { token }
-//   })
-// }
-
-// export function logout() {
-//   return request({
-//     url: '/vue-admin-template/user/logout',
-//     method: 'post'
-//   })
-// }

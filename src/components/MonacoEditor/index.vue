@@ -1,25 +1,25 @@
 <template>
-    <div>
-        Hello World
-    </div>
+  <div>
+    Hello World
+  </div>
 </template>
 
 <script>
-//import x from ''
+// import x from ''
 export default {
-    name: 'name',
-    props: {},
-    data () {
-        return {
-        }
-    },
-    components: {},
-    computed: {},
-    watch: {},
-    methods: {},
-    beforeMount () { },
-    mounted () { },
-    activated () { }
+  name: 'Name',
+  components: {},
+  props: {},
+  data() {
+    return {
+    }
+  },
+  computed: {},
+  watch: {},
+  beforeMount() { },
+  mounted() { },
+  activated() { },
+  methods: {}
 }
 </script>
 

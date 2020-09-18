@@ -12,7 +12,6 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
   {
     path: '/404',
     component: () => import('@/views/404'),
@@ -23,12 +22,14 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '首页', icon: 'dashboard' }
+      }
+    ]
   },
   {
     path: '/codeEditor',
@@ -42,7 +43,7 @@ export const constantRoutes = [
         name: 'Table',
         component: () => import('@/views/codeEditor/index'),
         meta: { title: '代码编辑器', icon: 'table' }
-      },
+      }
     ]
   },
   {
@@ -53,33 +54,32 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/Drag/index'),
-        meta: { title: '拖拽', icon: 'form' }
+        meta: { title: '拖拽工具', icon: 'form' }
       }
     ]
   },
-
   {
-    path: '/form',
+    path: '/commonlyUsed',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        name: 'commonlyUsed',
+        component: () => import('@/views/commonlyUsed/index'),
+        meta: { title: '常用插件', icon: 'form' }
       }
     ]
   },
 
-
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-const createRouter = () => new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
-})
+const createRouter = () =>
+  new Router({
+    // mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRoutes
+  })
 
 const router = createRouter()
 

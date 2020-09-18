@@ -1,16 +1,16 @@
 <template>
   <div class="dashboard-container">
     <h2>编辑器</h2>
-    <editor></editor>
+    <editor />
   </div>
 </template>
 
 <script>
-import editor from "@/components/MonacoEditor/index";
+import editor from '@/components/MonacoEditor/index'
 export default {
-  name: "Dashboard",
-  components: { editor },
-};
+  name: 'Dashboard',
+  components: { editor }
+}
 </script>
 
 <style lang="scss" scoped>
