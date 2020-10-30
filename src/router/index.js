@@ -75,7 +75,13 @@ export const constantRoutes = [
         path: 'index',
         name: 'commonlyUsed',
         component: () => import('@/views/commonlyUsed/index'),
-        meta: { title: '常用插件', icon: 'form' }
+        meta: { title: '玩', icon: 'form' }
+      },
+      { path: 'GDMap',
+        name: 'GDMap',
+        component: () => import('@/views/GDmap/index'),
+        meta: { title: '高德地图', icon: 'form' }
+
       }
     ]
   },

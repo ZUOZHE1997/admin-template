@@ -1,145 +1,129 @@
 <template>
-  <div id="demo">
-    <div id="small-box">
+  <div class="magnifier">
+    <!-- 小图 -->
+    <div
+      class="small-box"
+      @mouseover="handOver"
+      @mousemove="handMove"
+      @mouseout="handOut"
+    >
+      <img class="smallPic" :src="`${src}?x-oss-process=image/resize,l_836`" />
       <div
-        id="mark"
-        @mouseover="markMouseOver"
-        @mouseout="markMouseOut"
-        @mousemove="markMouseMove"
-      />
-      <div id="float-box" />
-      <img :src="url" alt="" style="width: 300px; height: 200px">
+        class="magnifier-zoom"
+        v-show="showMask"
+        :style="{
+          background: configs.maskColor,
+          height: configs.maskWidth + 'px',
+          width: configs.maskHeight + 'px',
+          opacity: configs.maskOpacity,
+          transform: transformMask,
+        }"
+      ></div>
     </div>
-    <div id="big-box">
-      <img id="big-img" :src="url" alt="">
+    <!-- 大图, 注意误差 -->
+    <div
+      class="magnifier-layer"
+      v-show="showMagnifier"
+      :style="{
+        width: configs.width + 'px',
+        height: configs.height + 'px',
+        left: configs.width + 20 + 'px',
+      }"
+    >
+      <div
+        class="big-box"
+        :style="{
+          width: bigWidth + 'px',
+          height: bigHeight + 'px',
+          left: moveLeft,
+          top: moveTop,
+        }"
+      >
+        <div
+          class="big-box-img"
+          :style="{
+            width: bigWidth - 2 + 'px',
+            height: bigHeight - 2 + 'px',
+          }"
+        >
+          <img
+            :src="bigSrc"
+            :style="{
+              maxWidth: bigWidth - 2 + 'px',
+              maxHeight: bigHeight - 2 + 'px',
+            }"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import x from ''
+//import x from ''
 export default {
-  name: 'Name',
-  components: {},
-  props: {},
+  name: "magnifier",
   data() {
     return {
-      url:
-        'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg', // 图片地址
-      bigBox: '', // 大盒子
-      smallBox: '', // 小盒子
-      floatBox: '', // 浮动的盒子
-      mark: '', // 蒙版
-      demo: '', // 最外层 的盒子
-      bigBoxImg: '' // 大图片
-    }
+      imgObj: {},
+      moveLeft: 0,
+      moveTop: 0,
+      transformMask: `translate(0px, 0px)`,
+      showMagnifier: false,
+      showMask: false,
+      init: false,
+    };
   },
-  computed: {},
-  watch: {},
-  beforeMount() {},
-  mounted() {
-    this.$nextTick(() => {
-      this.demo = document.getElementById('demo') // 获取dom
-      this.smallBox = document.getElementById('small-box')
-      this.floatBox = document.getElementById('float-box')
-      this.mark = document.getElementById('mark')
-      this.bigBox = document.getElementById('big-box')
-      this.bigBoxImg = document.getElementById('big-img')
-    })
+  computed: {
+    bigWidth() {
+      return this.configs.scale * this.configs.width;
+    },
+    bigHeight() {
+      return this.configs.scale * this.configs.height;
+    },
   },
-  activated() {},
   methods: {
-    // 鼠标经过蒙版显示大图和浮动的盒子
-    markMouseOver() {
-      this.floatBox.style.display = 'block'
-      this.bigBox.style.display = 'block'
-    },
-    markMouseOut() {
-      this.floatBox.style.display = 'none'
-      this.bigBox.style.display = 'none'
-    },
-    markMouseMove(ev) {
-      const _event = ev || window.event
-      let left =
-        _event.clientX -
-        this.demo.offsetLeft -
-        this.smallBox.offsetLeft -
-        this.floatBox.offsetWidth / 2
-      console.log(left)
-      let top =
-        _event.clientY -
-        this.demo.offsetTop -
-        this.smallBox.offsetTop -
-        this.floatBox.offsetHeight / 2
+    handMove(e) {
+      // 动态获取小图的位置（或者监听 scroll ）
+      let imgRectNow = this.imgObj.getBoundingClientRect();
+      let objX = e.clientX - imgRectNow.left;
+      let objY = e.clientY - imgRectNow.top;
 
-      if (left < 0) {
-        left = 0
-      } else if (left > this.mark.offsetWidth - this.floatBox.offsetWidth) {
-        left = this.mark.offsetWidth - this.floatBox.offsetWidth
+      // 计算初始的遮罩左上角的坐标
+      let maskX = objX - this.configs.maskWidth / 2;
+      let maskY = objY - this.configs.maskHeight / 2;
+
+      // 判断是否超出界限,并纠正
+      maskY = maskY < 0 ? 0 : maskY;
+      maskX = maskX < 0 ? 0 : maskX;
+      if (maskY + this.configs.maskHeight >= imgRectNow.height) {
+        maskY = imgRectNow.height - this.configs.maskHeight;
       }
-      if (top < 0) {
-        top = 0
-      } else if (top > this.mark.offsetHeight - this.floatBox.offsetHeight) {
-        top = this.mark.offsetHeight - this.floatBox.offsetHeight
+      if (maskX + this.configs.maskWidth >= imgRectNow.width) {
+        maskX = imgRectNow.width - this.configs.maskWidth;
       }
-      this.floatBox.style.left = left + 'px'
-      this.floatBox.style.top = top + 'px'
-      const percentX =
-        left / (this.mark.offsetWidth - this.floatBox.offsetWidth)
-      const percentY =
-        top / (this.mark.offsetHeight - this.floatBox.offsetHeight)
-      this.bigBoxImg.style.left =
-        -percentX * (this.bigBoxImg.offsetWidth - this.bigBox.offsetWidth) +
-        'px'
-      this.bigBoxImg.style.top =
-        -percentY * (this.bigBoxImg.offsetHeight - this.bigBox.offsetHeight) +
-        'px'
-    }
-  }
-}
+
+      // 遮罩移动
+      this.transformMask = `translate(${maskX}px, ${maskY}px)`;
+
+      // 背景图移动
+      this.moveLeft = -maskX * this.configs.scale + "px";
+      this.moveTop = -maskY * this.configs.scale + "px";
+    },
+    handOut() {
+      this.showMagnifier = false;
+      this.showMask = false;
+    },
+    handOver() {
+      if (!this.init) {
+        this.init = true;
+        this.imgObj = this.$el.getElementsByClassName("small-box")[0];
+      }
+      this.showMagnifier = true;
+      this.showMask = true;
+    },
+  },
+};
 </script>
 
-<style scoped lang="scss">
-#demo {
-  width: 300px;
-  height: 200px;
-  position: relative;
-}
-#small-box {
-  position: relative;
-  z-index: 1;
-}
-#float-box {
-  display: none;
-  width: 120px;
-  height: 90px;
-  position: absolute;
-  background: #99a9bf;
-  opacity: 0.4;
-  filter: alpha(opacity=40);
-}
-#mark {
-  position: absolute;
-  display: block;
-  width: 300px;
-  height: 200px;
-  background: #ffffff;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  z-index: 10;
-}
-#big-box {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 400px;
-  width: 600px;
-  height: 500px;
-  overflow: hidden;
-  z-index: 1;
-  img {
-    position: absolute;
-    z-index: 5;
-  }
-}
-</style>
+<style scoped lang="scss"></style>
