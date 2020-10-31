@@ -14,8 +14,8 @@
       style="
         text-align: left;
         background-color: #fff;
-        height: 300px;
-        width: 700px;
+        height: 500px;
+        width: 100%;
       "
       :language="choose"
       :code="code"

@@ -1,5 +1,8 @@
 <template>
-  <div id="container" />
+  <div class="app-container">
+    <p>{{ where }}</p>
+    <div id="container" />
+  </div>
 </template>
 <!--TODO:高德地图-->
 <script>
@@ -99,16 +102,18 @@ const geocoder_CallBack = data => {
 //   })
 // }
 // searchCity()
-getMap()
+// getMap()
 const gdmap = {
   data() {
     return {
-      city: ''
+      city: '',
+      where: ''
       // that: ''
     }
   },
   mounted() {
     that = this
+    getMap()
     // console.log(that)
   },
   methods: {
@@ -140,7 +145,8 @@ const gdmap = {
       // searchCity(this.city)
     },
     submit() {
-      console.log(address, '地址')
+      that.where = address
+      console.log(this.address)
       that.$emit('change', address)
     }
   }
@@ -149,7 +155,7 @@ export default gdmap
 </script>
 <style>
 #container {
-  width: 100%;
-  height: 400px;
+  width: 700%;
+  height: 600px;
 }
 </style>
