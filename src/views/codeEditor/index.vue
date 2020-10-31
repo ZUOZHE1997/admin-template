@@ -26,63 +26,63 @@
   </div>
 </template>
 <script>
-import MonacoEditor from "vue-monaco-editor";
+import MonacoEditor from 'vue-monaco-editor'
 
 export default {
-  name: "",
+  name: '',
   components: { MonacoEditor },
   props: {
     answer: {
       type: [String, Array, Boolean, Object],
-      default: "",
-    },
+      default: ''
+    }
   },
   data() {
     return {
-      editCode: "",
+      editCode: '',
       show: true,
-      choose: "javascript",
-      codeLanguage: ["C#", "java", "javascript", "python", "c"],
+      choose: 'javascript',
+      codeLanguage: ['C#', 'java', 'javascript', 'python', 'c'],
       code: this.answer,
       editor: null,
       options: {
-        theme: "vs",
+        theme: 'vs',
         selectOnLineNumbers: true,
         roundedSelection: false,
         readOnly: false,
         automaticLayout: true,
         glyphMargin: true,
-        showFoldingControls: "always",
+        showFoldingControls: 'always',
         formatOnPaste: true,
         formatOnType: true,
-        folding: true,
-      },
-    };
+        folding: true
+      }
+    }
   },
   watch: {},
   destroyed() {},
   mounted() {
-    this.$nextTick(function () {
-      console.log(123);
-    });
+    this.$nextTick(function() {
+      console.log(123)
+    })
   },
   methods: {
     change(val) {
-      this.show = false;
-      this.show = true;
+      this.show = false
+      this.show = true
     },
     onMounted(editor) {
-      this.editor = editor;
+      this.editor = editor
     },
     onCodeChange(editor) {
       // this.$parent.printCode()
-      this.editCode = editor.getValue();
-      console.log(this.editCode);
-      this.$emit("change", editor.getValue());
+      this.editCode = editor.getValue()
+      console.log(this.editCode)
+      this.$emit('change', editor.getValue())
       // console.log(editor.getValue())
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style scoped>
 #main {

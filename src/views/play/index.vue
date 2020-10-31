@@ -1,69 +1,69 @@
 <template>
   <div class="content">
-    <span id="txt"></span>
+    <span id="txt" />
   </div>
 </template>
 <script>
 export default {
-  name: "name",
+  name: 'Name',
+  components: {},
   props: {},
   data() {
     return {
-      txt: document.getElementById("txt"),
+      txt: document.getElementById('txt'),
       dafaultOpt: {
-        greetings: "hellworld!", // 文字
-        speed: 60, // 速度
-      },
-    };
+        greetings: 'hellworld!', // 文字
+        speed: 60 // 速度
+      }
+    }
   },
-  components: {},
   computed: {},
   watch: {},
-  methods: {
-    change(options) {
-      let str = this.txt.innerHTML;
-      console.log(str);
-      let text = [],
-        num = 0,
-        s1;
-      let setting = Object.assign(this.dafaultOpt, options);
-      text = setting.greetings.split("");
-      console.log(text);
-      const addLetter = () => {
-        const timer = Math.round(Math.random * 200 + setting.speed);
-        setTimeout(() => {
-          str += text[num];
-          console.log(str);
-          this.txt.innerHTML = str;
-          if (num > text.length - 2) {
-            num = 0;
-            setTimeout(() => {
-              deleteLetter();
-            }, 3000);
-            return false;
-          } else {
-            num++;
-            addLetter();
-          }
-        }, timer);
-      };
-      const deleteLetter = () => {
-        s1 = setInterval(() => {
-          str = str.substring(0, str.length - 1);
-          console.log(str);
-          this.txt.innerHTML = str;
-          if (this.txt.innerHTML === "") {
-            setTimeout(addLetter, 1000);
-            clearInterval(s1);
-          }
-        }, 40);
-      };
-    },
-  },
   beforeMount() {},
   mounted() {},
   activated() {},
-};
+  methods: {
+    change(options) {
+      let str = this.txt.innerHTML
+      console.log(str)
+      let text = []
+      let num = 0
+      let s1
+      const setting = Object.assign(this.dafaultOpt, options)
+      text = setting.greetings.split('')
+      console.log(text)
+      const addLetter = () => {
+        const timer = Math.round(Math.random * 200 + setting.speed)
+        setTimeout(() => {
+          str += text[num]
+          console.log(str)
+          this.txt.innerHTML = str
+          if (num > text.length - 2) {
+            num = 0
+            setTimeout(() => {
+              deleteLetter()
+            }, 3000)
+            return false
+          } else {
+            num++
+            addLetter()
+          }
+        }, timer)
+      }
+      const deleteLetter = () => {
+        s1 = setInterval(() => {
+          str = str.substring(0, str.length - 1)
+          console.log(str)
+          this.txt.innerHTML = str
+          if (this.txt.innerHTML === '') {
+            setTimeout(addLetter, 1000)
+            clearInterval(s1)
+          }
+        }, 40)
+      }
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

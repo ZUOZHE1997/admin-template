@@ -82,6 +82,7 @@ export default {
       } else if (top > this.mark.offsetHeight - this.floatBox.offsetHeight) {
         top = this.mark.offsetHeight - this.floatBox.offsetHeight
       }
+
       this.floatBox.style.left = left + 'px'
       this.floatBox.style.top = top + 'px'
       const percentX =

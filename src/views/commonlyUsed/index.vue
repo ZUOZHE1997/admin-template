@@ -5,7 +5,7 @@
       <el-button plain>更多</el-button>
     </el-button-group>
     <div class="content">
-      <magnifier />
+      <magnifier :preview-img="imgUrl" />
     </div>
   </div>
 </template>
@@ -19,24 +19,25 @@ export default {
   props: {},
   data() {
     return {
+      imgUrl: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
     }
   },
   computed: {},
   watch: {},
-  beforeMount() { },
-  mounted() { },
-  activated() { },
+  beforeMount() {},
+  mounted() {},
+  activated() {},
   methods: {}
 }
 </script>
 
 <style scoped lang="scss">
-.content{
-  border-radius:10px ;
+.content {
+  border-radius: 10px;
   margin: 10px;
   padding: 10px;
   width: 100%;
-  min-height:500px;
-  border: 1px solid #DCDFE6;
+  min-height: 500px;
+  border: 1px solid #dcdfe6;
 }
 </style>

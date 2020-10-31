@@ -24,7 +24,7 @@ export const constantRoutes = [
         path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index'),
-        meta: { title: '首页', icon: 'dashboard' }
+        meta: { title: '首页', icon: 'el-icon-s-home' }
       }
     ]
   },
@@ -32,14 +32,13 @@ export const constantRoutes = [
     path: '/codeEditor',
     component: Layout,
     redirect: '/codeEditor/index',
-
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    meta: { title: 'Example', icon: 'el-icon-s-order' },
     children: [
       {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/codeEditor/index'),
-        meta: { title: '代码编辑器', icon: 'table' }
+        meta: { title: '代码编辑器', icon: 'el-icon-edit-outline' }
       }
     ]
   },
@@ -51,7 +50,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/Drag/index'),
-        meta: { title: '拖拽工具', icon: 'form' }
+        meta: { title: '拖拽工具', icon: 'el-icon-rank' }
       }
     ]
   },
@@ -63,24 +62,27 @@ export const constantRoutes = [
         path: 'index',
         name: 'commonlyUsed',
         component: () => import('@/views/download/index'),
-        meta: { title: '常用下载方式', icon: 'form' }
+        meta: { title: '常用下载方式', icon: 'el-icon-download' }
       }
     ]
   },
   {
     path: '/commonlyUsed',
     component: Layout,
+    redirect: 'index',
+    meta: { title: '玩', icon: 'el-icon-attract' },
+    // meta: { title: '玩', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'index',
         name: 'commonlyUsed',
         component: () => import('@/views/commonlyUsed/index'),
-        meta: { title: '玩', icon: 'form' }
+        meta: { title: '插件', icon: 'el-icon-brush' }
       },
       { path: 'GDMap',
         name: 'GDMap',
         component: () => import('@/views/GDmap/index'),
-        meta: { title: '高德地图', icon: 'form' }
+        meta: { title: '高德地图', icon: 'el-icon-map-location' }
 
       }
     ]
