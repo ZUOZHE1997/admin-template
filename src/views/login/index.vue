@@ -55,7 +55,6 @@
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleLogin"
       >Login</el-button>
-
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: any</span>
@@ -66,6 +65,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import { setToken } from '../../utils/auth'
 // import { auth } from '@/api'
 export default {
   name: 'Login',
@@ -86,8 +86,8 @@ export default {
     }
     return {
       loginForm: {
-        username: '15624121063',
-        password: '314429'
+        username: 'admin',
+        password: '123456'
       },
       loginRules: {
         username: [
@@ -130,17 +130,19 @@ export default {
             password: this.loginForm.password
           }
           console.log(data)
-          this.$router.push({ path: '/dashboard' })
+          setToken('faketoken')
+          this.$router.push({ path: '/' })
+
           this.loading = false
-          //   auth
-          //     .login(data)
-          //     .then(res => {
-          //       this.$router.push({ path: '/dashboard' })
-          //       this.loading = false
-          //     })
-          //     .catch(err => {
-          //       console.log(err)
-          //     })
+          // auth
+          //   .login(data)
+          //   .then(res => {
+          //     this.$router.push({ path: '/dashboard' })
+          //     this.loading = false
+          //   })
+          //   .catch(err => {
+          //     console.log(err)
+          //   })
         } else {
           console.log('error submit!!')
           return false

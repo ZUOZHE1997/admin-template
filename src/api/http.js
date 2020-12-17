@@ -19,14 +19,14 @@ axios.interceptors.response.use(
   },
   error => {
     // 对响应错误做点什么
-    console.log(error.response)
+    // console.log(error.response)
     const res = error.response
     if (res.status === 401) {
-      console.log('401401401401401401401401401401401401401401')
+      // console.log('401401401401401401401401401401401401401401')
       store.dispatch('user/clearAuth')
       vm.$router.push('/login')
     } else if (res.status === 403) {
-      console.log('403403403403403403403403403403403403')
+      // console.log('403403403403403403403403403403403403')
     }
     return Promise.reject(error)
   }

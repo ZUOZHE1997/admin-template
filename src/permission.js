@@ -6,16 +6,18 @@ import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 import { auth } from '@/api'
+// const whiteList = []
 NProgress.configure({
   showSpinner: false
 }) // NProgress Configuration
-// const whiteList = ['/login'] // no redirect whitelist
+const whiteList = ['/login'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   NProgress.start()
   document.title = getPageTitle(to.meta.title)
   const hasToken = getToken()
-  if (![undefined, 'undefined', null, 'null'].includes(hasToken)) {
+  console.log(hasToken)
+  if (![undefined, 'undefined', null, 'null', ''].includes(hasToken)) {
     if (to.path === '/login') {
       next({
         path: '/'
@@ -29,7 +31,7 @@ router.beforeEach(async(to, from, next) => {
         try {
           let user = {}
           auth.getUserInfo().then((res) => {
-            console.log(res, '获取个人信息')
+            // console.log(res, '获取个人信息')
             user = res.data
           })
           store.dispatch('user/setInfo', user)
@@ -43,15 +45,16 @@ router.beforeEach(async(to, from, next) => {
       }
     }
   } else {
-    next()
-    // if (whiteList.indexOf(to.path) !== -1) {
-    //   next()
-    // } else {
-    //   next()
-    //   // TODO:在这改了如果没有token也可以登录,实际上是不应该的
-    //   // next(`/login?redirect=${to.path}`)
-    //   NProgress.done()
-    // }
+    console.log('meiyou')
+    // next(`/login?redirect=${to.path}`)
+    if (whiteList.indexOf(to.path) !== -1) {
+      next()
+    } else {
+      next()
+      // TODO:在这改了如果没有token也可以登录,实际上是不应该的
+      next(`/login?redirect=${to.path}`)
+      NProgress.done()
+    }
   }
 })
 router.afterEach(() => {

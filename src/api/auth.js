@@ -8,10 +8,10 @@ const request = {}
 
 request.login = data => {
   return http.post('/api/login', data).then(res => {
-    console.log(res)
+    // console.log(res)
     store.dispatch('user/saveToken', res.data.accessToken)
-  }).catch(err => {
-    console.log(err)
+  }).catch(() => {
+    // console.log(err)
     Notification({
       title: '提示',
       message: '登陆出错了,等会刷新试试',
@@ -24,8 +24,8 @@ request.logout = data => {
   return http.post('/api/lgout', data).then(res => {
     // console.log(res)
     store.dispatch('user/clearAuth')
-  }).catch(err => {
-    console.log(err)
+  }).catch(() => {
+    // console.log(err)
     Notification({
       title: '提示',
       message: '登陆出错了,等会刷新试试',
@@ -39,8 +39,8 @@ request.getUserInfo = () => {
     console.log(res)
     store.dispatch('user/saveToken', res.data.accessToken)
     return res
-  }).catch(err => {
-    console.log(err)
+  }).catch(() => {
+    // console.log(err)
     // Notification({
     //   title: '提示',
     //   message: '',
