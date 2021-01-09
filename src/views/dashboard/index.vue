@@ -5,14 +5,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-// import editor from '@/components/MonacoEditor/index'
 export default {
-  name: 'Dashboard',
-  // components: { editor },
-  computed: {
-    ...mapGetters(['name'])
-  }
+  name: 'Dashboard'
 }
 </script>
 

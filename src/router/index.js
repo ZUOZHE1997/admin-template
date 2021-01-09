@@ -5,17 +5,6 @@ Vue.use(Router)
 import Layout from '@/layout'
 export const constantRoutes = [
   {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
-
-  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -31,12 +20,11 @@ export const constantRoutes = [
   {
     path: '/codeEditor',
     component: Layout,
-    redirect: '/codeEditor/index',
-    meta: { title: 'Example', icon: 'el-icon-s-order' },
+    redirect: 'index',
     children: [
       {
-        path: 'table',
-        name: 'Table',
+        path: 'index',
+        name: 'index',
         component: () => import('@/views/codeEditor/index'),
         meta: { title: '代码编辑器', icon: 'el-icon-edit-outline' }
       }
@@ -79,11 +67,11 @@ export const constantRoutes = [
         component: () => import('@/views/commonlyUsed/index'),
         meta: { title: '插件', icon: 'el-icon-brush' }
       },
-      { path: 'GDMap',
+      {
+        path: 'GDMap',
         name: 'GDMap',
         component: () => import('@/views/GDmap/index'),
         meta: { title: '高德地图', icon: 'el-icon-map-location' }
-
       }
     ]
   },
@@ -93,17 +81,14 @@ export const constantRoutes = [
 
 const createRouter = () =>
   new Router({
-    // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
   })
 
 const router = createRouter()
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
-// console.log(router)
 export default router

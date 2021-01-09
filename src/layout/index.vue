@@ -29,13 +29,13 @@ export default {
   mixins: [ResizeMixin],
   computed: {
     sidebar() {
-      return this.$store.state.app.sidebar
+      return this.$store.state.sidebar
     },
     device() {
-      return this.$store.state.app.device
+      return this.$store.state.device
     },
     fixedHeader() {
-      return this.$store.state.settings.fixedHeader
+      return false
     },
     classObj() {
       return {
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     handleClickOutside() {
-      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+      this.$store.dispatch('closeSideBar', { withoutAnimation: false })
     }
   }
 }
