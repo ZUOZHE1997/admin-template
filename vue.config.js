@@ -1,6 +1,6 @@
 'use strict'
 module.exports = {
   publicPath: '/',
-  outputDir: 'dist',
+  outputDir: 'docs',
   assetsDir: 'static'
 }
