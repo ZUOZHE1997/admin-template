@@ -67,16 +67,5 @@ export default {
 .__drag_item {
   animation: shake .3s;
 }
-@keyframes shake {
-  0% {
-    transform: translate3d(-10%, 0, 0);
-  }
-  50% {
-    transform: translate3d(10%, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
 </style>
 
