@@ -1,25 +1,23 @@
 <template>
-  <div>
-    <div ref="wrap" class="magnifier-wrap">
-      <div
-        ref="small"
-        class="small-wrap"
-        @mouseleave="onMouseleave"
-        @mousemove="onMousemove"
-        @mouseenter="onMouseenter"
-      >
-        <div v-show="isShow" ref="mask" class="mask-wrap" />
-        <img :src="minImgUrl" :width="boxSize" :height="boxSize">
-      </div>
-      <div v-show="isShow" ref="maxBox" class="max-wrap">
-        <img
-          ref="img"
-          :src="maxImgUrl"
-          :style="{width: maxImgWidth + 'px', height: maxImgHeight + 'px'}"
-          class="img"
-          @load="setMaskSize"
-        >
-      </div>
+  <div ref="wrap" class="magnifier-wrap">
+    <div
+      ref="small"
+      class="small-wrap"
+      @mouseleave="onMouseleave"
+      @mousemove="onMousemove"
+      @mouseenter="onMouseenter"
+    >
+      <div v-show="isShow" ref="mask" class="mask-wrap" />
+      <img :src="minImgUrl" :width="boxSize" :height="boxSize" />
+    </div>
+    <div v-show="isShow" ref="maxBox" class="max-wrap">
+      <img
+        ref="img"
+        :src="maxImgUrl"
+        :style="{ width: maxImgWidth + 'px', height: maxImgHeight + 'px' }"
+        class="img"
+        @load="setMaskSize"
+      />
     </div>
   </div>
 </template>
@@ -32,31 +30,30 @@ export default {
   props: {
     boxSize: {
       type: Number,
-      default: 500
+      default: 500,
     },
     minImgUrl: {
       type: String,
-      default: ''
+      default: '',
     },
     maxImgUrl: {
       type: String,
-      default: ''
+      default: '',
     },
     autoReverse: {
       type: Boolean,
-      default: true
+      default: true,
     },
     direction: {
       type: String,
-      default: 'right'
-    }
+      default: 'right',
+    },
   },
   data() {
     return {
       isShow: false,
       maxImgWidth: '',
-      maxImgHeight: ''
-
+      maxImgHeight: '',
     }
   },
   mounted() {
@@ -181,8 +178,8 @@ export default {
         padddingTop +
         this.small.clientTop +
         'px'
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -198,8 +195,8 @@ export default {
     box-sizing: border-box;
 
     .mask-wrap {
-        width: 100px;
-        height: 100px;
+      width: 100px;
+      height: 100px;
       position: absolute;
       cursor: move;
       background: RGBA(255, 255, 255, 0.5);
